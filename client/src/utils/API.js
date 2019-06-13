@@ -5,7 +5,7 @@ export default {
         return axios.get("/api/users");
     },
 
-    getUserWorkouts: function() {
-        return axios.get("/api/workouts/:userid")
+    getUserWorkouts: function(userid) {
+        return axios.get(`/api/workouts/${userid}`)
     }
 };

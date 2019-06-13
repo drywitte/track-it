@@ -8,7 +8,11 @@ class MyWorkouts extends Component {
     }
 
     componentDidMount () {
-        API.getUserWorkouts(this.state.user_id).then(console.log("success")).catch(console.log("failure"));
+        API.getUserWorkouts(this.state.user_id).
+            then(res => {
+                this.setState({
+                    workouts: res.data})
+            }).catch(console.log("failure"));
     }
 
     render() {
