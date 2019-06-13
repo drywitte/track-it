@@ -10,7 +10,9 @@ module.exports = function(sequelize, DataTypes) {
 
     User.associate = function(models) {
         User.hasOne(models.Workout_instance);
-        User.hasOne(models.Workout_template);
+        User.hasOne(models.Workout_template, 
+            //{foreignkey: "creator_id"}
+            );
     };
 
     return User;
