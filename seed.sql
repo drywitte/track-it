@@ -10,7 +10,7 @@ insert into Workout_templates (id, name, workout_structure, createdAt, updatedAt
 (2, "4x4s", '{"length": "4"}', now(), now(), 3),
 (3, "4x4s", '{"length": "4"}', now(), now(), 4);
 
-insert into Workout_instances (id, workout_template, workout_details, createdAt, updatedAt, userId) values 
+insert into Workout_instances (id, WorkoutTemplateID, workout_details, createdAt, updatedAt, userId) values 
 (1, 1, '{"length": "3"}', now(), now(), 1),
 (2, 1, '{"length": "3"}', now(), now(), 1),
 (3, 2, '{"length": "3"}', now(), now(), 3)

@@ -12,7 +12,7 @@ class MyWorkouts extends Component {
             then(res => {
                 this.setState({
                     workouts: res.data})
-            }).catch(console.log("failure"));
+            })
     }
 
     render() {
