@@ -6,6 +6,7 @@ module.exports = function(sequelize, DataTypes) {
 
     WorkoutTemplate.associate = function(models) {
         WorkoutTemplate.hasOne(models.Workout_instance);
+        WorkoutTemplate.belongsTo(models.User);
     };
 
     return WorkoutTemplate;

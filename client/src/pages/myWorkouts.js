@@ -10,6 +10,7 @@ class MyWorkouts extends Component {
     componentDidMount () {
         API.getUserWorkouts(this.state.user_id).
             then(res => {
+                console.log(res.data);
                 this.setState({
                     workouts: res.data})
             })

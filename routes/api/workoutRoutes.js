@@ -7,7 +7,10 @@ router.route("/:userid")
       db.Workout_instance.findAll({
           where: {
               UserId: userid
-        }
+        },
+        include : [{
+          model: db.Workout_template}, 
+          {model: db.User}]
         }).then(function(response) {
             res.json(response);
     })

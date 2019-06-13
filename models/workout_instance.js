@@ -3,5 +3,10 @@ module.exports = function(sequelize, DataTypes) {
         workout_details: DataTypes.JSON,
     });
 
+    WorkoutInstance.associate = function(models) {
+        WorkoutInstance.belongsTo(models.User);
+        WorkoutInstance.belongsTo(models.Workout_template);
+    }
+
     return WorkoutInstance;
 }
