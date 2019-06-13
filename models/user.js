@@ -7,5 +7,12 @@ module.exports = function(sequelize, DataTypes) {
         date_of_birth: DataTypes.DATE,
         gender: DataTypes.STRING
     });
+
+    User.associate = function(models) {
+        User.hasOne(models.Workout_instance);
+        User.hasOne(models.Workout_template);
+    };
+
     return User;
 }
+

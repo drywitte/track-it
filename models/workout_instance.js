@@ -4,5 +4,10 @@ module.exports = function(sequelize, DataTypes) {
         workout_details: DataTypes.JSON,
         user_id: DataTypes.INTEGER,
     });
+
+    WorkoutInstance.associate = function(models) {
+        WorkoutInstance.belongsTo(models.User);
+    };
+
     return WorkoutInstance;
 }
