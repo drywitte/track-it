@@ -2,13 +2,23 @@ import React, { Component } from "react";
 import API from "../utils/API";
 
 class Users extends Component {
+    state = {
+        users: []
+    }
+    
     componentDidMount() {
-        console.log(API.getUsers());
+        API.getUsers().then(res => {
+            console.log(res.data[0]);
+            this.setState({users: res.data});
+        })
     }
 
     render() {
         return (
-            <h1>users</h1>
+            <div>
+                <h1>users</h1>
+                <p>{this.state.users.map(user => user.id)}</p>
+            </div>
         );
     }
 }
