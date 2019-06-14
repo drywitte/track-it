@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
+import Workout from "../components/Workout";
 
 class MyWorkouts extends Component {
     state = {
@@ -12,13 +13,20 @@ class MyWorkouts extends Component {
             then(res => {
                 console.log(res.data);
                 this.setState({
-                    workouts: res.data})
+                    user_id: this.state.user_id,
+                    workouts: res.data
+                })
             })
     }
 
     render() {
         return(
-            <div>list of workouts</div>
+            <div>
+            <h1>list of workouts</h1>
+            {this.state.workouts.map(workout => {
+                return <Workout {...workout} key={workout.id} />
+            })}
+            </div>  
         )
     }
 }
