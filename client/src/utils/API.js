@@ -6,10 +6,14 @@ export default {
     },
 
     getUserWorkouts: function(userid) {
-        return axios.get(`/api/workouts/${userid}`)
+        return axios.get(`/api/workouts/${userid}`);
     },
 
     postWorkoutTemplate: function(body) {
-        return axios.post('/api/templates/create', body)
+        return axios.post('/api/templates/create', body);
+    },
+
+    getWorkoutTemplates: function() {
+        return axios.get('/api/templates');
     }
 };

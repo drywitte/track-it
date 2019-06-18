@@ -12,7 +12,13 @@ class WorkoutTemplates extends Component {
     }
 
     componentDidMount () {
+        this.loadTemplates();
+    }
 
+    loadTemplates = () => {
+        API.getWorkoutTemplates().then(res => {
+            console.log(res);
+        });
     }
 
     arrayToObject = (array) => {
