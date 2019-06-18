@@ -1,16 +1,35 @@
 import React, {Component} from "react";
 import API from "../utils/API";
-import InsertTemplate from "../components/WorkoutTempalte";
+import WorkoutTemplate from "../components/WorkoutTemplate";
+
 
 
 class WorkoutTemplates extends Component {
     state = {
         workouts_templates: [],
         user_id: 1,
-        mode: "view"
+        mode: "view",
+        new_template: {},
+        segment_count: 0
     }
 
     componentDidMount () {
+
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const new_segment = {
+            amount: e.target.amount.value,
+            category: e.target.category.value
+        }
+
+        this.setState({
+            new_template: new_segment
+        });
+    }
+
+    addSegment = () => {
 
     }
 
@@ -31,7 +50,7 @@ class WorkoutTemplates extends Component {
                     : 
                     <div>
                         <button disabled="true" className="btn btn-primary" onClick={this.handleCreateNew}>Create New</button>
-                        <InsertTemplate />
+                        <WorkoutTemplate mode={this.state.mode} submitAction={this.handleSubmit} />
                     </div>
                 }
             </div>
