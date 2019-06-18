@@ -16,10 +16,17 @@ export function WorkoutTemplate (props) {
     }
 
 
-    function onSegmentUpdate(id, e) {
+    function onSegmentChange(id, e) {
         console.log(`segment change for ${id}`);
-        
-        // [e.target.name] = e.target.value;
+        new_template.forEach(element => 
+            element.id === id ? (
+                element.segmentData = {
+                    ...element.segmentData,
+                    [e.target.name] : e.target.value
+                }
+            ) : null
+        )
+        console.log(new_template);
     }
 
     return(
@@ -29,7 +36,7 @@ export function WorkoutTemplate (props) {
                 <form onSubmit={e => props.submitAction(new_template, e)}>
                     {
                         new_template.map(segment => 
-                            <Segment key={segment.id} id={segment.id} onSegmentUpdate={onSegmentUpdate}/> )
+                            <Segment key={segment.id} id={segment.id} onSegmentChange={onSegmentChange}/> )
                     }
                     <button type="button" className="btn btn-secondary m-1" onClick={updateSegments}>Add Segment</button>
                     <button className="btn btn-primary m-1" >Submit</button>
