@@ -16,8 +16,10 @@ export function WorkoutTemplate (props) {
     }
 
 
-    function onSegmentUpdate(id) {
+    function onSegmentUpdate(id, e) {
         console.log(`segment change for ${id}`);
+        
+        // [e.target.name] = e.target.value;
     }
 
     return(
