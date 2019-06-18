@@ -25,7 +25,6 @@ export function WorkoutTemplate (props) {
 
 
     function onSegmentChange(id, e) {
-        // console.log(`segment change for ${id}`);
         new_template.forEach(element => 
             element.id === id ? (
                 element.segmentData = {
@@ -34,7 +33,6 @@ export function WorkoutTemplate (props) {
                 }
             ) : null
         )
-        // console.log(new_template);
     }
 
 

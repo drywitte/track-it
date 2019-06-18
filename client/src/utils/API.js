@@ -10,8 +10,6 @@ export default {
     },
 
     postWorkoutTemplate: function(body) {
-        console.log("passed body is ")
-        console.log(body);
         return axios.post('/api/templates/create', body)
     }
 };
