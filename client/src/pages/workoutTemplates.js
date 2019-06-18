@@ -9,18 +9,27 @@ class WorkoutTemplates extends Component {
         workouts_templates: [],
         user_id: 1,
         mode: "view",
-        // new_template: {},
+        new_template: {},
     }
 
     componentDidMount () {
 
     }
 
+    arrayToObject = (array) => {
+        let count = 0;
+        return array.reduce((obj, item, index) => {
+            obj[index] = item.segmentData
+            console.log(obj)
+            return obj
+        }, {})
+    }
+
     handleSubmit = (new_template, e) => {
         e.preventDefault();
         console.log("submitted");
-        console.log("new template is ");
-        console.log(new_template);
+        var templateObj = this.arrayToObject(new_template);
+        console.log(templateObj);
         const new_segment = {
             amount: e.target.amount.value,
             category: e.target.category.value

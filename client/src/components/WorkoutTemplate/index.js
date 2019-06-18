@@ -2,14 +2,22 @@ import React, { useState } from "react";
 import Segment from "../Segment"
 
 export function WorkoutTemplate (props) {
-    const [ new_template, setSegments] = useState([
-        { id: Date.now(), segmentData: null}
+    const defaultSegmentData = {
+        category: "Run",
+        type: "Time",
+        measure: "Pace",
+        amount: null
+    }
+
+    const [new_template, setSegments] = useState([
+        { id: Date.now(), segmentData: defaultSegmentData}
     ]);
     
+
     function updateSegments() {
         setSegments([
             ...new_template,
-            { id: Date.now(), segmentData: null }
+            { id: Date.now(), segmentData: defaultSegmentData }
         ]);
 
         console.log(new_template);
@@ -17,7 +25,7 @@ export function WorkoutTemplate (props) {
 
 
     function onSegmentChange(id, e) {
-        console.log(`segment change for ${id}`);
+        // console.log(`segment change for ${id}`);
         new_template.forEach(element => 
             element.id === id ? (
                 element.segmentData = {
@@ -26,8 +34,9 @@ export function WorkoutTemplate (props) {
                 }
             ) : null
         )
-        console.log(new_template);
+        // console.log(new_template);
     }
+
 
     return(
         <div className="card">
