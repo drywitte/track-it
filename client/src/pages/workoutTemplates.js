@@ -9,16 +9,18 @@ class WorkoutTemplates extends Component {
         workouts_templates: [],
         user_id: 1,
         mode: "view",
-        new_template: {},
-        segment_count: 0
+        // new_template: {},
     }
 
     componentDidMount () {
 
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = (new_template, e) => {
         e.preventDefault();
+        console.log("submitted");
+        console.log("new template is ");
+        console.log(new_template);
         const new_segment = {
             amount: e.target.amount.value,
             category: e.target.category.value
