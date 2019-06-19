@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Segment from "../Segment"
 
 export function WorkoutTemplate (props) {
+    console.log("segments are")
+    console.log(props.segments)
+
     const defaultSegmentData = {
         category: "Run",
         type: "Time",
@@ -19,8 +22,6 @@ export function WorkoutTemplate (props) {
             ...new_template,
             { id: Date.now(), segmentData: defaultSegmentData }
         ]);
-
-        console.log(new_template);
     }
 
 
@@ -40,14 +41,27 @@ export function WorkoutTemplate (props) {
         <div className="card">
             <h2 className="card-title">New Workout</h2>
             <div className="form-group">
-                <form onSubmit={e => props.submitAction(new_template, e)}>
-                    {
-                        new_template.map(segment => 
-                            <Segment key={segment.id} id={segment.id} onSegmentChange={onSegmentChange}/> )
-                    }
-                    <button type="button" className="btn btn-secondary m-1" onClick={updateSegments}>Add Segment</button>
-                    <button className="btn btn-primary m-1" >Submit</button>
-                </form>
+                {props.isEditable === "true" ? (
+                    <div>
+                        <form onSubmit={e => props.onSubmit(new_template, e)}>
+                            {
+                                new_template.map(segment => 
+                                    <Segment key={segment.id} id={segment.id} onSegmentChange={onSegmentChange} isEditable={props.isEditable} /> )
+                            }
+                            <button type="button" className="btn btn-secondary m-1" onClick={updateSegments}>Add Segment</button>
+                            <button className="btn btn-primary m-1" >Submit</button>
+                        </form>
+                    </div>
+                )
+                : (
+                    <div className="card-body">
+                        {
+                            Object.keys(props.segments).map((keyName, keyIndex) => {
+                                return <Segment key={keyName} id={keyName} isEditable={props.isEditable} segmentData={props.segments[keyName]} />
+                        })
+                        }
+                    </div>
+                )}
             </div>
         </div>
     )
