@@ -16,5 +16,16 @@ router.route("/:userid")
     })
   })
 
+router.route("/create")
+  .post(function(req, res) {
+    db.Workout_instance.create(req.body)
+      .then(function(dbres) {
+        res.json(dbres);
+      })
+      .catch(function(err) {
+        res.json(err);
+      })
+  })
+
 
 module.exports = router;

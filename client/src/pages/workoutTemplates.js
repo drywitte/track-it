@@ -7,6 +7,7 @@ import WorkoutTemplate from "../components/WorkoutTemplate";
 class WorkoutTemplates extends Component {
     state = {
         workout_templates: [],
+        completed_workouts: [],
         user_id: 1,
         mode: "view",
     }
@@ -50,6 +51,17 @@ class WorkoutTemplates extends Component {
         });
     }
 
+    postCompleted = (e) => {
+        const body = {
+            WorkoutTemplateId: e.target.id, 
+            UserId: this.state.user_id
+        }
+        API.postWorkoutInstance(body)
+            .then(res => {
+                console.log(res);
+            })
+    }
+
     addSegment = () => {
 
     }
@@ -76,11 +88,19 @@ class WorkoutTemplates extends Component {
                 : (
                     <div>
                         <button disabled={true} className="btn btn-primary" onClick={this.handleCreateNew}>Create New</button>
-                        <WorkoutTemplate isEditable="true" submitAction={this.handleSubmit} />
+                        <WorkoutTemplate 
+                            isEditable="true" 
+                            submitAction={this.handleSubmit} />
                     </div>
                 )}
                 {this.state.workout_templates.map(workout => {
-                    return <WorkoutTemplate key={workout.id} isEditable="false" name={workout.name} segments={workout.workout_structure} />
+                    return <WorkoutTemplate 
+                        key={workout.id} 
+                        isEditable="false" 
+                        name={workout.name} 
+                        id={workout.id} 
+                        segments={workout.workout_structure} 
+                        postCompleted={this.postCompleted} />
                 })}
             </div>
         )

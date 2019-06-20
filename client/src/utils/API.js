@@ -15,5 +15,9 @@ export default {
 
     getWorkoutTemplates: function() {
         return axios.get('/api/templates');
+    },
+
+    postWorkoutInstance: function(body) {
+        return axios.post('/api/workouts/create', body)
     }
 };

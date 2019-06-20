@@ -5,12 +5,12 @@ export function WorkoutTemplate (props) {
     let name = ""
 
     const defaultSegmentData = {
-        category: "Run",
+        // category: "Run",
         type: "Time",
-        measure: "Pace",
         type_amount: "",
+        measure: "Pace",
         measure_amount: "",
-        amount: null
+        // amount: null
     }
 
     const [new_template, setSegments] = useState([
@@ -28,7 +28,6 @@ export function WorkoutTemplate (props) {
     function handleNameChange(e) {
         name = e.target.value;
     }
-
 
     function onSegmentChange(id, e) {
         new_template.forEach(element => 
@@ -67,6 +66,7 @@ export function WorkoutTemplate (props) {
                             })
                             }
                         </div>
+                        <button className="btn btn-primary m-1" id={props.id} onClick={e => props.postCompleted(e)}>Completed</button>
                     </div>
                 )}
         </div>

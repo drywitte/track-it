@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import Workout from "../components/Workout";
+import WorkoutTemplate from "../components/WorkoutTemplate"
 
 class MyWorkouts extends Component {
     state = {
@@ -20,12 +21,19 @@ class MyWorkouts extends Component {
     }
 
     render() {
+        console.log(this.state.workouts);
         return(
             <div>
-            <h1>list of workouts</h1>
-            {this.state.workouts.map(workout => {
-                return <Workout {...workout} key={workout.id} />
-            })}
+                <h1>list of workouts</h1>
+                {this.state.workouts.map(workout => {
+                        return <WorkoutTemplate 
+                            key={workout.id} 
+                            isEditable="false" 
+                            name={workout.Workout_template.name} 
+                            id={workout.id} 
+                            segments={workout.Workout_template.workout_structure} 
+                            postCompleted={this.postCompleted} />
+                })}
             </div>  
         )
     }
