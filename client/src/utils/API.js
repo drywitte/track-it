@@ -19,5 +19,13 @@ export default {
 
     postWorkoutInstance: function(body) {
         return axios.post('/api/workouts/create', body)
+    },
+
+    postLogin: function(body) {
+        return axios.post("/api/login", body);
+    },
+
+    postSignup: function(body) {
+        return axios.post("/api/signup", body);
     }
 };

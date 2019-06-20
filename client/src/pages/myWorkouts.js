@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import Workout from "../components/Workout";
 import WorkoutTemplate from "../components/WorkoutTemplate"
 
 class MyWorkouts extends Component {
@@ -32,7 +31,9 @@ class MyWorkouts extends Component {
                             name={workout.Workout_template.name} 
                             id={workout.id} 
                             segments={workout.Workout_template.workout_structure} 
-                            postCompleted={this.postCompleted} />
+                            postCompleted={this.postCompleted} 
+                            completed={true} />
+                            
                 })}
             </div>  
         )

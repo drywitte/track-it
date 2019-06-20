@@ -66,7 +66,7 @@ export function WorkoutTemplate (props) {
                             })
                             }
                         </div>
-                        <button className="btn btn-primary m-1" id={props.id} onClick={e => props.postCompleted(e)}>Completed</button>
+                        {props.completed ? null : <button className="btn btn-primary m-1" id={props.id} onClick={e => props.postCompleted(e)}>Completed</button> }
                     </div>
                 )}
         </div>
