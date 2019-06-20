@@ -12,13 +12,11 @@ class WorkoutTemplates extends Component {
     }
 
     componentDidMount () {
-        this.loadTemplates();
-        console.log(this.state.workout_templates)
+        this.loadTemplates()
     }
 
     loadTemplates = () => {
         API.getWorkoutTemplates().then(res => {
-            console.log(res);
             this.setState({
                 workout_templates: res.data
             })
@@ -32,20 +30,21 @@ class WorkoutTemplates extends Component {
         }, {})
     }
 
-    handleSubmit = (template, e) => {
+    handleSubmit = (template, workoutName, e) => {
         e.preventDefault();
         const workout_template = this.arrayToObject(template);
         this.postTemplate({
             workout_structure: workout_template,
-            name: "test",
+            name: workoutName,
             UserId: this.state.user_id
-        });
+        })
     }
 
 
     postTemplate = (req) => {
-        API.postWorkoutTemplate(req ).then(function(res) {
-            console.log(res)
+        API.postWorkoutTemplate(req ).then(res => {
+            this.loadTemplates()
+            this.toggleMode()
         }).catch(function(err) {
             console.log(err);
         });
@@ -55,10 +54,14 @@ class WorkoutTemplates extends Component {
 
     }
 
-    handleCreateNew = () => {
-        this.setState({
-            mode: "edit"
-        })
+    toggleMode = () => {
+        this.state.mode === "view" ? 
+            this.setState({
+                mode: "edit"
+            })
+            : this.setState({
+                mode: "view"
+            })
     }
 
     
@@ -67,17 +70,17 @@ class WorkoutTemplates extends Component {
             <div className="card">
                 {this.state.mode === "view" ? (
                     <div>
-                        <button className="btn btn-primary" onClick={this.handleCreateNew}>Create New</button>
+                        <button className="btn btn-primary" onClick={this.toggleMode}>Create New</button>
                     </div>
                 ) 
                 : (
                     <div>
-                        <button disabled="true" className="btn btn-primary" onClick={this.handleCreateNew}>Create New</button>
+                        <button disabled={true} className="btn btn-primary" onClick={this.handleCreateNew}>Create New</button>
                         <WorkoutTemplate isEditable="true" submitAction={this.handleSubmit} />
                     </div>
                 )}
                 {this.state.workout_templates.map(workout => {
-                    return <WorkoutTemplate isEditable="false" segments={workout.workout_structure} />
+                    return <WorkoutTemplate key={workout.id} isEditable="false" name={workout.name} segments={workout.workout_structure} />
                 })}
             </div>
         )
