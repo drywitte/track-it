@@ -18,6 +18,7 @@ router.route("/login", passport.authenticate("local"))
 router.route("/signup")
   .post(function(req, res) {
     const body = req.body
+    console.log(req.body);
     db.User.create(
       {
         email: body.email,

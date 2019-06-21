@@ -4,6 +4,7 @@
   "description": "Track and share your track workouts",
   "main": "server.js",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "express": "^4.17.1",
     "express-session": "^1.16.2",
     "if-env": "^1.0.4",

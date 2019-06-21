@@ -22,10 +22,10 @@ export default {
     },
 
     postLogin: function(body) {
-        return axios.post("/api/login", body);
+        return axios.post("/api/users/login", body);
     },
 
     postSignup: function(body) {
-        return axios.post("/api/signup", body);
+        return axios.post("/api/users/signup", body);
     }
 };
