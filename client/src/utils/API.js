@@ -27,5 +27,9 @@ export default {
 
     postSignup: function(body) {
         return axios.post("/api/users/signup", body);
+    },
+
+    getLogout: function() {
+        return axios.get("/api/users/logout");
     }
 };

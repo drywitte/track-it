@@ -18,7 +18,7 @@ class Signup extends Component {
 
     handleSumbit = () => {
         API.postSignup(this.state)
-            .then(() => <Redirect to="/x" />)
+            .then((data) => window.location.replace(data))
             .catch(err => console.log(err))
     }
 
