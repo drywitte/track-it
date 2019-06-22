@@ -12,13 +12,16 @@ import Signup from "./pages/signup";
 import AppContext from "./utils/AppContext";
 
 class App extends Component {
+  
   state = {
     isAuthed: true,
-    // setAuth: (bool) => {
-    //   this.setState({
-    //     isAuthed: bool
-    //   })
-    // }
+    setAuth: this.setAuth
+  }
+
+  setAuth = (status) => {
+    this.setState({
+      isAuthed: status
+    })
   }
 
   render() {
@@ -38,7 +41,7 @@ class App extends Component {
           </Router>
         </AppContext.Provider>
       </div>
-    );
+    )
   }
 }
 

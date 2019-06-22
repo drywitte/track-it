@@ -6,7 +6,7 @@ import AppContext from "../utils/AppContext";
 
 
 class Login extends Component {
-    context = AppContext
+    static context = AppContext
 
     state = {
         email: "",
