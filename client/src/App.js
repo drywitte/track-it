@@ -9,23 +9,37 @@ import Home from "./pages/home";
 import myWorkouts from "./pages/myWorkouts";
 import WorkoutTemplates from "./pages/workoutTemplates";
 import Signup from "./pages/signup";
+import AppContext from "./utils/AppContext";
 
-function App() {
-  return (
-    <div className="App">
-      <Nav />
-      <Router>
-        <Switch>
-          <Route exact path="/users" component={Users} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route exact path="/" component={Home} />
-          <Route path="/myworkouts" component={myWorkouts} />
-          <Route exact path="/workout_templates" component={WorkoutTemplates} />
-        </Switch>
-      </Router>
-    </div>
-  );
+class App extends Component {
+  state = {
+    isAuthed: true,
+    // setAuth: (bool) => {
+    //   this.setState({
+    //     isAuthed: bool
+    //   })
+    // }
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <AppContext.Provider value={this.state}>
+          <Nav />
+          <Router>
+            <Switch>
+              <Route exact path="/users" component={Users} />
+              <Route path="/login" component={Login} />
+              <Route path="/signup" component={Signup} />
+              <Route exact path="/" component={Home} />
+              <Route path="/myworkouts" component={myWorkouts} />
+              <Route exact path="/workout_templates" component={WorkoutTemplates} />
+            </Switch>
+          </Router>
+        </AppContext.Provider>
+      </div>
+    );
+  }
 }
 
 export default App;

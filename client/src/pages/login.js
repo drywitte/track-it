@@ -2,12 +2,16 @@ import React, { Component } from "react";
 import { Input, Submit } from "../components/Form"
 import API from "../utils/API"
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import AppContext from "../utils/AppContext";
 
 
 class Login extends Component {
+    context = AppContext
+
     state = {
         email: "",
-        password: ""
+        password: "",
+        page: null
     }
 
     handleChange = (e) => {
@@ -20,12 +24,16 @@ class Login extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         console.log("handling submit")  
-        console.log(this.state)
-        API.postLogin(this.state)
-            .then(res => 
-                <Router > 
-                    <Redirect to="/myworkouts" />
-                </Router>
+        {console.log(this.context)}
+        const body = {
+            email: this.state.email,
+            password: this.state.password
+        }
+        console.log(body);
+        API.postLogin(body)
+            .then(res => {
+                console.log(AppContext.isAuthed);
+                }
             )
             .catch(err => console.log(err))
     }

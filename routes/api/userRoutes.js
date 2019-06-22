@@ -11,12 +11,10 @@ router.route("/")
   })
   
 router.post('/login', passport.authenticate('local', { failureRedirect: '/?error=LoginError'}), (req, res, next) => {
-  console.log('/login handler');
   req.session.save((err) => {
       if (err) {
           return next(err);
       }
-
       res.status(200).send('OK');
   });
 });
