@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import WorkoutTemplate from "../components/WorkoutTemplate"
+import {withUser} from "../utils/UserContext";
+import WorkoutTemplate from "../components/WorkoutTemplate";
 
 class MyWorkouts extends Component {
-    state = {
-        user_id: 1,
-        workouts: []
+    constructor(props) {
+        super(props);
+        this.state = {
+            workouts: []
+        }
     }
 
     componentDidMount () {
-        API.getUserWorkouts(this.state.user_id).
+        API.getUserWorkouts(this.props.user.userId).
             then(res => {
                 console.log(res.data);
                 this.setState({
-                    user_id: this.state.user_id,
                     workouts: res.data
                 })
             })
@@ -40,4 +42,4 @@ class MyWorkouts extends Component {
     }
 }
 
-export default MyWorkouts;
+export default withUser(MyWorkouts);

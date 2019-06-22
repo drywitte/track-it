@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Segment from "../Segment"
+import {withUser} from "../../utils/UserContext"
 
 export function WorkoutTemplate (props) {
     let name = ""
@@ -74,4 +75,4 @@ export function WorkoutTemplate (props) {
 }
 
 
-export default WorkoutTemplate;
+export default withUser(WorkoutTemplate);

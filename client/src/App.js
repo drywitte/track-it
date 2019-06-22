@@ -16,20 +16,8 @@ class App extends Component {
     super(props);
   
     this.state = {
-      isAuthed: false,
-      userId: null,
-      setAuth: this.setAuth
     }
   }
-
-  // componentDidMount = () =>{
-  //   this.context = {
-  //     userId: this.state.userId,
-  //     isAuthed: this.state.isAuthed,
-  //     setAuth: this.state.setAuth
-  //   }
-  //   console.log("app context is", this.context)
-  // }
 
   setAuth = (bool, userId) => {
     console.log("runing set auth")
