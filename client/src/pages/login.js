@@ -2,16 +2,17 @@ import React, { Component } from "react";
 import { Input, Submit } from "../components/Form"
 import API from "../utils/API"
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import AppContext from "../utils/AppContext";
+import UserContext from "../utils/UserContext";
 
 
 class Login extends Component {
-    static context = AppContext
-
-    state = {
-        email: "",
-        password: "",
-        page: null
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: "",
+            password: "",
+            page: null
+        }
     }
 
     handleChange = (e) => {
@@ -21,10 +22,8 @@ class Login extends Component {
         });
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = (setAuth, e) => {
         e.preventDefault();
-        console.log("handling submit")  
-        {console.log(this.context)}
         const body = {
             email: this.state.email,
             password: this.state.password
@@ -32,9 +31,8 @@ class Login extends Component {
         console.log(body);
         API.postLogin(body)
             .then(res => {
-                console.log(AppContext.isAuthed);
-                }
-            )
+                setAuth(res.data.user_id);
+            })
             .catch(err => console.log(err))
     }
     
@@ -44,7 +42,12 @@ class Login extends Component {
                 <h1>Login</h1>
                 <Input placeholder="email" name="email" type="text" onChange={this.handleChange} />
                 <Input placeholder="Password" name="password" type="password" onChange={this.handleChange} />
-                <Submit onClick={this.handleSubmit} />
+                <UserContext.Consumer>
+                    {(state) => (
+                        <Submit onClick={e => this.handleSubmit(state.setAuth, e)} />
+                    )}
+                </UserContext.Consumer>
+                
             </div>
         );
     }

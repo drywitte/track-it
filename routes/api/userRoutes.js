@@ -15,7 +15,10 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/?error
       if (err) {
           return next(err);
       }
-      res.status(200).send('OK');
+      let user = {
+        user_id: req.user.id
+      }
+      res.status(200).send(user);
   });
 });
 
@@ -29,8 +32,9 @@ router.get('/logout', (req, res, next) => {
   });
 });
 
-router.post("/api/signup", function(req, res) {
+router.post("/signup", function(req, res) {
   console.log(req.body);
+  let body = req.body;
   db.User.create(
     {
       email: body.email,

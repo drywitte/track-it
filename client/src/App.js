@@ -9,25 +9,31 @@ import Home from "./pages/home";
 import myWorkouts from "./pages/myWorkouts";
 import WorkoutTemplates from "./pages/workoutTemplates";
 import Signup from "./pages/signup";
-import AppContext from "./utils/AppContext";
+import UserContext from "./utils/UserContext";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
   
-  state = {
-    isAuthed: true,
-    setAuth: this.setAuth
+    this.state = {
+      isAuthed: false,
+      userId: null,
+      setAuth: this.setAuth
+    }
   }
 
-  setAuth = (status) => {
+  setAuth = (user) => {
+    console.log("runing set auth")
     this.setState({
-      isAuthed: status
+      isAuthed: true,
+      userId: user.id
     })
   }
 
   render() {
     return (
       <div className="App">
-        <AppContext.Provider value={this.state}>
+        <UserContext.Provider value={this.state} >
           <Nav />
           <Router>
             <Switch>
@@ -39,7 +45,7 @@ class App extends Component {
               <Route exact path="/workout_templates" component={WorkoutTemplates} />
             </Switch>
           </Router>
-        </AppContext.Provider>
+        </UserContext.Provider>
       </div>
     )
   }
