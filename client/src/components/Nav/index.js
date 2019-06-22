@@ -1,13 +1,17 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import API from "../../utils/API";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import {withUser} from "../../utils/UserContext";
 
-export function Nav() {
+export function Nav(props) {
 
-    function handleLogout() {
+    function handleLogout(setAuth) {
+        console.log(props)
         console.log("logging out");
         API.getLogout()
             .then(res => {
+                props.setAuth(false, null)
                 return (
                     <Router > 
                         <Redirect to="/myworkouts" />
@@ -20,25 +24,29 @@ export function Nav() {
     return(
     <ul className="nav">
         <li className="nav-item">
-            <a className="nav-link" href="/">Home</a>
+            <Link className="nav-link" to="/">Home</Link>
         </li>
         <li className="nav-item">
-            <a className="nav-link" href="/myworkouts">Completed Workouts</a>
+            <Link className="nav-link" to="/myworkouts">Completed Workouts</Link>
         </li>
         <li className="nav-item">
-            <a className="nav-link" href="/workout_templates">Workout Templates</a>
+            <Link className="nav-link" to="/workout_templates">Workout Templates</Link>
         </li>
         <li className="nav-item">
-            <a className="nav-link" href="/search">Browse Workouts</a>
+            <Link className="nav-link" to="/search">Browse Workouts</Link>
         </li>
+        {props.user.isAuthed ? (
+            <li className="nav-item">
+                    <Link className="nav-link btn-secondary btn" onClick={e => handleLogout()}>Logout</Link>
+            </li>
+            ):
+            null
+        }
         <li className="nav-item">
-            <a className="nav-link btn-secondary btn" onClick={handleLogout}>Logout</a>
-        </li>
-        <li className="nav-item">
-            <a className="nav-link btn-secondary btn" href="/login">Login</a>
+            <Link className="nav-link btn-secondary btn" to="/login">Login</Link>
         </li>
     </ul>
     )
 }
 
-export default Nav;
+export default withUser(Nav);

@@ -22,20 +22,34 @@ class App extends Component {
     }
   }
 
-  setAuth = (user) => {
+  // componentDidMount = () =>{
+  //   this.context = {
+  //     userId: this.state.userId,
+  //     isAuthed: this.state.isAuthed,
+  //     setAuth: this.state.setAuth
+  //   }
+  //   console.log("app context is", this.context)
+  // }
+
+  setAuth = (bool, userId) => {
     console.log("runing set auth")
     this.setState({
-      isAuthed: true,
-      userId: user.id
+      isAuthed: bool,
+      userId: userId
     })
   }
 
   render() {
     return (
       <div className="App">
-        <UserContext.Provider value={this.state} >
-          <Nav />
+        <UserContext.Provider
+          value={{
+            user: this.state,
+            setAuth: this.setAuth,
+          }}
+        >
           <Router>
+            <Nav />
             <Switch>
               <Route exact path="/users" component={Users} />
               <Route path="/login" component={Login} />
@@ -50,5 +64,7 @@ class App extends Component {
     )
   }
 }
+
+UserContext.contextType = UserContext;
 
 export default App;

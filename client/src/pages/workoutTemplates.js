@@ -1,18 +1,22 @@
 import React, {Component} from "react";
 import API from "../utils/API";
 import WorkoutTemplate from "../components/WorkoutTemplate";
+import UserContext from "../utils/UserContext";
 
 
 
 class WorkoutTemplates extends Component {
-    state = {
-        workout_templates: [],
-        completed_workouts: [],
-        user_id: 1,
-        mode: "view",
+    constructor(props) {
+        super(props);
+        this.state = {
+            workout_templates: [],
+            completed_workouts: [],
+            mode: "view",
+        }
     }
 
     componentDidMount () {
+        console.log(this.context);
         this.loadTemplates()
     }
 
@@ -38,7 +42,9 @@ class WorkoutTemplates extends Component {
             workout_structure: workout_template,
             name: workoutName,
             UserId: this.state.user_id
-        })
+        }).then(res =>
+            console.log(res)
+        )
     }
 
 
@@ -80,6 +86,9 @@ class WorkoutTemplates extends Component {
     render() {
         return (
             <div className="card">
+                <UserContext.Consumer>
+                    {(UserContext) => console.log(UserContext)}
+                </UserContext.Consumer>
                 {this.state.mode === "view" ? (
                     <div>
                         <button className="btn btn-primary" onClick={this.toggleMode}>Create New</button>
@@ -106,5 +115,8 @@ class WorkoutTemplates extends Component {
         )
     }
 }
+
+UserContext.contextType = UserContext;
+
 
 export default WorkoutTemplates;

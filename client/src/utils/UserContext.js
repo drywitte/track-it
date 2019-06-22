@@ -6,4 +6,12 @@ const UserContext = React.createContext({
     setAuth: () => {}
 });
 
+export const withUser = Component => props => (
+    <UserContext.Consumer>
+        {
+            userValues => <Component {...props} {...userValues } />
+        }
+    </UserContext.Consumer>
+);
+
 export default UserContext;

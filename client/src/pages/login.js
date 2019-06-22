@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Input, Submit } from "../components/Form"
 import API from "../utils/API"
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import UserContext from "../utils/UserContext";
+import { withUser } from "../utils/UserContext";
 
 
 class Login extends Component {
@@ -14,6 +14,10 @@ class Login extends Component {
             page: null
         }
     }
+
+    // componentDidMount = () => {
+    //     console.log("this context is", this.context)
+    // }
 
     handleChange = (e) => {
         const {name, value} = e.target
@@ -31,26 +35,25 @@ class Login extends Component {
         console.log(body);
         API.postLogin(body)
             .then(res => {
-                setAuth(res.data.user_id);
+                res.data.user_id ? 
+                    setAuth(true, res.data.user_id)
+                    : console.log("invalid")
             })
             .catch(err => console.log(err))
     }
     
     render() {
+        console.log(this.props);
         return (
             <div>
                 <h1>Login</h1>
                 <Input placeholder="email" name="email" type="text" onChange={this.handleChange} />
                 <Input placeholder="Password" name="password" type="password" onChange={this.handleChange} />
-                <UserContext.Consumer>
-                    {(state) => (
-                        <Submit onClick={e => this.handleSubmit(state.setAuth, e)} />
-                    )}
-                </UserContext.Consumer>
+                <Submit onClick={e => this.handleSubmit(this.props.setAuth, e)} />
                 
             </div>
         );
     }
 }
 
-export default Login;
+export default withUser(Login);
