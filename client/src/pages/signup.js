@@ -6,8 +6,8 @@ import {withUser} from "../utils/UserContext";
 
 class Signup extends Component {
     state = {
-        email: null,
-        password: null,
+        email: "",
+        password: "",
         userName: null,
         firstName: null,
         lastName: null,
@@ -15,11 +15,17 @@ class Signup extends Component {
         gender: null,
     }
 
+
     validate = () => {
+        // look into https://www.npmjs.com/package/react-validation
         let validated = true;
-        this.state.email ? null 
-        : validated = false
-        console.log(validated);
+        if (this.state.email == "" || this.state.password == "") {
+            validated = false
+        }
+        else {
+            validated = true
+        }
+        return validated
     }
 
     handleChange = (e) => {
@@ -27,22 +33,28 @@ class Signup extends Component {
         this.setState({
             [name] : value
         })
-        this.validate();
+
     }
 
     handleSumbit = () => {
-        API.postSignup(this.state)
-            // .then((res) => {
-            //    return res.data.user_id ? this.props.setAuth(true, res.data.user_id): null
-            // })
-            // .catch(err => console.log(err))
+        // let validated = this.validate();
+        // // console.log("is validated ", validated)
+        // // validated ? 
+        API.postSignup(this.state).then(res => {
+            return res.status === 200 ? 
+            this.props.setAuth(true, res.data.user_id)
+            : console.log(res.status)
+        })
+        .catch((err) => {
+            console.log(err)  
+        })
     }
 
     render() {
         return (
             
             <div>
-                {this.props.isAuthed ? 
+                {this.props.user.isAuthed ? 
                     <Redirect to="/myworkouts" />
                     :
                     <React.Fragment>

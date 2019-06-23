@@ -46,7 +46,6 @@ router.get('/logout', (req, res, next) => {
 });
 
 router.post("/signup", function(req, res) {
-  console.log(req.body);
   let body = req.body;
   db.User.create(
     {
@@ -58,41 +57,16 @@ router.post("/signup", function(req, res) {
       gender: body.gender,
       password: body.password
     }
-  ).then(function() {
-    // let user = {
-    //   user_id: req.user.id
-    // }
-    res.redirect(307, "/api/login")
-    // .send(user);
+  ).then(function(data) {
+    let user = {
+      user_id: data.dataValues.id
+    }
+    res.status(200).send(user);
   }).catch(function(err) {
     console.log(err);
-    res.json(err);
-    // res.status(422).json(err.errors[0].message);
+    res.status(422).send(err.errors[0].message);
   });
 });
-
-// router.route("/signup")
-//   .post(function(req, res) {
-//     const body = req.body
-//     console.log(req.body);
-//     db.User.create(
-//       {
-//         email: body.email,
-//         first_name: body.first_name,
-//         last_name: body.last_name,
-//         user_name: body.username,
-//         date_of_birth: body.date_of_birth,
-//         gender: body.gender,
-//         password: body.password
-//       }
-//     )
-//     .then(function() {
-//       res.redirect(307, "/api/users/login");
-//     })
-//     .catch(function(err) {
-//       res.json(err);
-//     })
-//   })
 
 
 module.exports = router;
