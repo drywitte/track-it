@@ -1,7 +1,13 @@
 module.exports = function(sequelize, DataTypes) {
     var WorkoutTemplate = sequelize.define("Workout_template", {
-        name: DataTypes.STRING,
-        workout_structure: DataTypes.JSON,
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        workout_structure: {
+            type: DataTypes.JSON,
+            allowNull: false
+        }
     });
 
     WorkoutTemplate.associate = function(models) {

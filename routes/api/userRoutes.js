@@ -59,7 +59,11 @@ router.post("/signup", function(req, res) {
       password: body.password
     }
   ).then(function() {
-    res.redirect(307, "/api/login");
+    // let user = {
+    //   user_id: req.user.id
+    // }
+    res.redirect(307, "/api/login")
+    // .send(user);
   }).catch(function(err) {
     console.log(err);
     res.json(err);

@@ -13,12 +13,8 @@ class Login extends Component {
             password: "",
             page: null
         }
-        this.setAuth = this.props.setAuth.bind(this);
     }
 
-    // componentDidMount = () => {
-    //     console.log("this context is", this.context)
-    // }
 
     handleChange = (e) => {
         const {name, value} = e.target
@@ -33,13 +29,12 @@ class Login extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        console.log(body);
         API.postLogin(body)
             .then(res => {
                 res.data.user_id ? (
-                    this.setAuth(true, res.data.user_id)
+                    this.props.setAuth(true, res.data.user_id)
                     )
-                    : this.setAuth(false, null)
+                    : this.props.setAuth(false, null)
             })
             .catch(err => console.log(err))
     }

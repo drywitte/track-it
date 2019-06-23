@@ -13,3 +13,13 @@ export function Submit(props) {
         <button {...props}>Submit</button>
     );
 }
+
+export function Selector(props) {
+    return (
+        <select className="form-control" name={props.name} onChange={props.handleChange}>
+            {props.options.map(option => {
+                return (<option value={option.value} key={option.value}>{option.value}</option>)
+            })}
+        </select>
+    )
+}

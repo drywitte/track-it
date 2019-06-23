@@ -22,7 +22,6 @@ class App extends Component {
   }
 
   setAuth = (bool, userId) => {
-    console.log("runing set auth")
     this.setState({
       isAuthed: bool,
       userId: userId
