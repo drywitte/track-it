@@ -4,12 +4,17 @@ const db = require("./models");
 const app = express();
 const path = require("path");
 const PORT = process.env.PORT || 3001;
-var session = require("express-session");
-var passport = require("./config/passport");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const passport = require("./config/passport");
 
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(cookieParser());
+app.use(bodyParser());
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));

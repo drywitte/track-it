@@ -16,6 +16,8 @@ class App extends Component {
     super(props);
   
     this.state = {
+      isAuthed: false,
+      userId: null,
     }
   }
 

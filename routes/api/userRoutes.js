@@ -10,7 +10,8 @@ router.route("/")
     })
   })
   
-router.post('/login', passport.authenticate('local', { failureRedirect: '/?error=LoginError'}), (req, res, next) => {
+router.post('/login',
+  passport.authenticate('local', { failureRedirect: '/?error=LoginError'}), (req, res, next) => {
   req.session.save((err) => {
       if (err) {
           return next(err);
@@ -18,9 +19,21 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/?error
       let user = {
         user_id: req.user.id
       }
+      const redirect = "/myworkouts"
       res.status(200).send(user);
   });
 });
+
+// function(req, res, next) {
+//   passport.authenticate('local', function(err, user, info) {
+//     if (err) { return next(err); }
+//     if (!user) { return res.redirect('/login'); }
+//     req.logIn(user, function(err) {
+//       if (err) { return next(err); }
+//       return res.send(user);
+//     });
+//   })(req, res, next);
+// });
 
 router.get('/logout', (req, res, next) => {
   req.logout();

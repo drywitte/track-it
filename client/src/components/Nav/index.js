@@ -6,7 +6,7 @@ import {withUser} from "../../utils/UserContext";
 
 export function Nav(props) {
 
-    function handleLogout(setAuth) {
+    function handleLogout() {
         console.log(props)
         console.log("logging out");
         API.getLogout()
@@ -37,7 +37,7 @@ export function Nav(props) {
         </li>
         {props.user.isAuthed ? (
             <li className="nav-item">
-                    <Link className="nav-link btn-secondary btn" onClick={e => handleLogout()}>Logout</Link>
+                    <Link className="nav-link btn-secondary btn" to="/" onClick={e => handleLogout()}>Logout</Link>
             </li>
             ):
             null

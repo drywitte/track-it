@@ -13,6 +13,7 @@ class Login extends Component {
             password: "",
             page: null
         }
+        this.setAuth = this.props.setAuth.bind(this);
     }
 
     // componentDidMount = () => {
@@ -26,7 +27,7 @@ class Login extends Component {
         });
     }
 
-    handleSubmit = (setAuth, e) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         const body = {
             email: this.state.email,
@@ -35,22 +36,27 @@ class Login extends Component {
         console.log(body);
         API.postLogin(body)
             .then(res => {
-                res.data.user_id ? 
-                    setAuth(true, res.data.user_id)
-                    : console.log("invalid")
+                res.data.user_id ? (
+                    this.setAuth(true, res.data.user_id)
+                    )
+                    : this.setAuth(false, null)
             })
             .catch(err => console.log(err))
     }
     
     render() {
-        console.log(this.props);
         return (
             <div>
+                {this.props.user.isAuthed ? 
+                    <Redirect to="/myworkouts" />
+                : 
+                <div>
                 <h1>Login</h1>
                 <Input placeholder="email" name="email" type="text" onChange={this.handleChange} />
                 <Input placeholder="Password" name="password" type="password" onChange={this.handleChange} />
-                <Submit onClick={e => this.handleSubmit(this.props.setAuth, e)} />
-                
+                <Submit onClick={this.handleSubmit} />
+                </div>
+                }
             </div>
         );
     }
