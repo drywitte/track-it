@@ -9,6 +9,10 @@ export default {
         return axios.get(`/api/workouts/${userid}`);
     },
 
+    getUserWorkoutIds: function(userid) {
+        return axios.get(`/api/workouts/ids/${userid}`);
+    },
+
     postWorkoutTemplate: function(body) {
         return axios.post('/api/templates/create', body);
     },

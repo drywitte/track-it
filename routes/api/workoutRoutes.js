@@ -11,9 +11,26 @@ router.route("/:userid")
         include : [{
           model: db.Workout_template}, 
           {model: db.User}]
-        }).then(function(response) {
-            res.json(response);
-    })
+        })
+        .then(function(data) {
+            res.json(data);
+        })
+        .catch(err => console.log(err))
+  })
+  
+router.route("/ids/:userid")
+  .get(function(req, res) {
+      let userid = req.params.userid;
+      db.Workout_instance.findAll({
+          where: {
+              UserId: userid
+          }
+        })
+        .then(function(data) {
+          console.log(data)
+          res.json(data);
+        })
+        .catch(err => console.log(err))
   })
 
 router.route("/create")

@@ -37,17 +37,23 @@ class Signup extends Component {
     }
 
     handleSumbit = () => {
-        // let validated = this.validate();
-        // // console.log("is validated ", validated)
-        // // validated ? 
-        API.postSignup(this.state).then(res => {
-            return res.status === 200 ? 
-            this.props.setAuth(true, res.data.user_id)
-            : console.log(res.status)
-        })
-        .catch((err) => {
-            console.log(err)  
-        })
+        let validated = this.validate();
+        console.log("is validated ", validated);
+        if (validated) { 
+            API.postSignup(this.state)
+                .then(res => {
+                    return res.status === 200 ? 
+                    this.props.setAuth(true, res.data.user_id)
+                    : console.log(res.status)
+                })
+                .catch((err) => {
+                    console.log(err)  
+                })
+        }
+        else {
+            console.log("not validated")
+        }
+
     }
 
     render() {

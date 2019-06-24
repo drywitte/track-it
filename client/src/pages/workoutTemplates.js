@@ -16,15 +16,34 @@ class WorkoutTemplates extends Component {
     }
 
     componentDidMount () {
-        this.loadTemplates()
+        this.loadData();
+    }
+
+    loadData() {
+        this.loadTemplates();
+        this.loadCompletedWorkouts();
+    }
+
+    loadCompletedWorkouts = () => {
+        API.getUserWorkoutIds(this.props.user.userId)
+            .then(res => { 
+                console.log("completed workouts", res.data)
+                const idArr = this.parseIds(res.data)
+                this.setState({
+                    completed_workouts: idArr
+                })
+            })
+            .catch(err => console.log(err))
     }
 
     loadTemplates = () => {
-        API.getWorkoutTemplates().then(res => {
-            this.setState({
-                workout_templates: res.data
+        API.getWorkoutTemplates()
+            .then(res => {
+                this.setState({
+                    workout_templates: res.data
+                })
             })
-        });
+            .catch(err => console.log(err))
     }
 
     arrayToObject = (array) => {
@@ -32,6 +51,15 @@ class WorkoutTemplates extends Component {
             obj[index] = item.segmentData;
             return obj;
         }, {})
+    }
+
+    parseIds = (array) => {
+        console.log(array)
+        return array.reduce((newArr, item, index) => {
+            newArr[index] = item.id
+            console.log(newArr)
+            return newArr
+        })
     }
 
     handleSubmit = (template, workoutName, e) => {
@@ -65,10 +93,6 @@ class WorkoutTemplates extends Component {
             })
     }
 
-    addSegment = () => {
-
-    }
-
     toggleMode = () => {
         this.state.mode === "view" ? 
             this.setState({
@@ -79,6 +103,10 @@ class WorkoutTemplates extends Component {
             })
     }
 
+    countCompletions = (e) => {
+        const id = e.target.id;
+        
+    }
     
     render() {
         return (
@@ -103,7 +131,8 @@ class WorkoutTemplates extends Component {
                         name={workout.name} 
                         id={workout.id} 
                         segments={workout.workout_structure} 
-                        postCompleted={this.postCompleted} />
+                        postCompleted={this.postCompleted}
+                        completionCount={this.countCompletions} />
                 })}
             </div>
         )
