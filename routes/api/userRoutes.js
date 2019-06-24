@@ -11,7 +11,7 @@ router.route("/")
   })
   
 router.post('/login',
-  passport.authenticate('local', { failureRedirect: '/?error=LoginError'}), (req, res, next) => {
+  passport.authenticate('local', { failureMessage: "invalid username or password"}), (req, res, next) => {
   req.session.save((err) => {
       if (err) {
           return next(err);
@@ -19,7 +19,6 @@ router.post('/login',
       let user = {
         user_id: req.user.id
       }
-      const redirect = "/myworkouts"
       res.status(200).send(user);
   });
 });

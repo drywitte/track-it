@@ -36,7 +36,7 @@ class Login extends Component {
                     )
                     : this.props.setAuth(false, null)
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err.response))
     }
     
     render() {
