@@ -10,7 +10,6 @@ import myWorkouts from "./pages/myWorkouts";
 import WorkoutTemplates from "./pages/workoutTemplates";
 import Signup from "./pages/signup";
 import UserContext from "./utils/UserContext";
-import {PrivateRoute} from "./components/PrivateRoute";
 
 class App extends Component {
   constructor(props) {

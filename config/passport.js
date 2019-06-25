@@ -33,11 +33,19 @@ passport.use(new LocalStrategy(
 ));
 
 passport.serializeUser(function(user, cb) {
-cb(null, user);
+  cb(null, user.id);
 });
 
-passport.deserializeUser(function(obj, cb) {
-cb(null, obj);
+passport.deserializeUser(function(id, cb) {
+  db.User.findOne({
+    where: {
+      id: id
+    }
+  }).then(function(dbUser) {
+    cb(null, dbUser);
+  }).catch(function(err) {
+    cb(err, null);
+  })
 });
 
 // Exporting our configured passport
