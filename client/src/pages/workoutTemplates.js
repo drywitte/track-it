@@ -27,10 +27,9 @@ class WorkoutTemplates extends Component {
     loadCompletedWorkouts = () => {
         API.getUserWorkoutIds(this.props.user.userId)
             .then(res => { 
-                console.log("completed workouts", res.data)
-                const idArr = this.parseIds(res.data)
+                const workout_ids = this.parseIds(res.data)
                 this.setState({
-                    completed_workouts: idArr
+                    completed_workouts: workout_ids
                 })
             })
             .catch(err => console.log(err))
@@ -53,13 +52,13 @@ class WorkoutTemplates extends Component {
         }, {})
     }
 
-    parseIds = (array) => {
-        console.log(array)
-        return array.reduce((newArr, item, index) => {
-            newArr[index] = item.id
-            console.log(newArr)
-            return newArr
-        })
+    parseIds = (workouts) => {
+        let workoutIds = []
+        console.log(workouts)
+        workouts.forEach(workout => {
+            workoutIds.push(workout.WorkoutTemplateId)
+        });     
+        return workoutIds;   
     }
 
     handleSubmit = (template, workoutName, e) => {
@@ -94,6 +93,8 @@ class WorkoutTemplates extends Component {
     }
 
     toggleMode = () => {
+        console.log("workout ids", this.state.completed_workouts)
+        console.log("workout_templates", this.state.workout_templates)
         this.state.mode === "view" ? 
             this.setState({
                 mode: "edit"
@@ -104,8 +105,12 @@ class WorkoutTemplates extends Component {
     }
 
     countCompletions = (e) => {
+        console.log("generating completions")
         const id = e.target.id;
-        
+    }
+
+    findOverlap = () => {
+
     }
     
     render() {
@@ -132,7 +137,8 @@ class WorkoutTemplates extends Component {
                         id={workout.id} 
                         segments={workout.workout_structure} 
                         postCompleted={this.postCompleted}
-                        completionCount={this.countCompletions} />
+                        isCompleted={this.state.completed_workouts.indexOf(workout.id) === -1 ? false : true}
+                        />
                 })}
             </div>
         )
