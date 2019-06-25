@@ -54,7 +54,6 @@ class WorkoutTemplates extends Component {
 
     parseIds = (workouts) => {
         let workoutIds = []
-        console.log(workouts)
         workouts.forEach(workout => {
             workoutIds.push(workout.WorkoutTemplateId)
         })   

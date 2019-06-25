@@ -4,6 +4,19 @@ export function Segment(props) {
     // function disableOption() {
         
     // }
+
+    function preposition() {
+        console.log("running the preposition function")
+        switch (props.segmentData.measure) {
+            case "Time":
+                return "in";
+            case "Pace":
+                return "@";
+            default:
+                return "for";
+        }
+    }
+
     
     return (
         <div>
@@ -31,12 +44,7 @@ export function Segment(props) {
                 ) : (
                     <div>
                         <div className="card-text">
-                            {/* <p>Category: {props.segmentData.category}</p> */}
-                            <p>Type: {props.segmentData.type}</p>
-                            <p>Type Amount: {props.segmentData.type_amount}</p>
-                            <p>Measure: {props.segmentData.measure}</p>
-                            <p>Measure Amount: {props.segmentData.measure_amount}</p>
-                            {/* <p>Amount: {props.segmentData.amount}</p> */}
+                            <p>{props.segmentData.type_amount} {preposition()} {props.segmentData.measure_amount}</p>
                         </div>
                     </div>
                 )

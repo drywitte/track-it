@@ -47,7 +47,7 @@ export function WorkoutTemplate (props) {
                 {props.isEditable === "true" ? (
                         <div className="form-group">
                         <form onSubmit={e => props.submitAction(new_template, name, e)}>
-                        <input type="text" name="workoutName" onChange={e => handleNameChange(e)} className="card-title" placeholder="Workout Name" />
+                            <input type="text" name="workoutName" onChange={e => handleNameChange(e)} className="card-title" placeholder="Workout Name" />
                             {
                                 new_template.map(segment => 
                                     <Segment key={segment.id} id={segment.id} onSegmentChange={onSegmentChange} isEditable={props.isEditable} /> )
