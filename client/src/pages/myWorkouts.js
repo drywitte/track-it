@@ -32,9 +32,9 @@ class MyWorkouts extends Component {
                             isEditable="false" 
                             name={workout.Workout_template.name} 
                             id={workout.id} 
-                            segments={workout.Workout_template.workout_structure} 
-                            postCompleted={this.postCompleted} 
-                            completed={true} />
+                            segments={workout.Workout_template.workout_structure}  
+                            displayAction={false}
+                            />
                             
                 })}
             </div>  

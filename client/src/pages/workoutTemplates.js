@@ -57,7 +57,7 @@ class WorkoutTemplates extends Component {
         console.log(workouts)
         workouts.forEach(workout => {
             workoutIds.push(workout.WorkoutTemplateId)
-        });     
+        })   
         return workoutIds;   
     }
 
@@ -82,6 +82,11 @@ class WorkoutTemplates extends Component {
     }
 
     postCompleted = (e) => {
+        console.log(e.target.id)
+        let new_completed_workouts = [...this.state.completed_workouts, parseInt(e.target.id)]
+        this.setState({
+            completed_workouts: new_completed_workouts
+        });
         const body = {
             WorkoutTemplateId: e.target.id, 
             UserId: this.props.user.userId
@@ -102,15 +107,6 @@ class WorkoutTemplates extends Component {
             : this.setState({
                 mode: "view"
             })
-    }
-
-    countCompletions = (e) => {
-        console.log("generating completions")
-        const id = e.target.id;
-    }
-
-    findOverlap = () => {
-
     }
     
     render() {
@@ -138,8 +134,10 @@ class WorkoutTemplates extends Component {
                         segments={workout.workout_structure} 
                         postCompleted={this.postCompleted}
                         isCompleted={this.state.completed_workouts.indexOf(workout.id) === -1 ? false : true}
+                        displayAction={true}
                         />
-                })}
+                    })
+                }
             </div>
         )
     }
