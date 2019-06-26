@@ -3,6 +3,8 @@ import { Input, Submit, Selector } from "../components/Form"
 import API from "../utils/API"
 import { Redirect } from 'react-router-dom';
 import {withUser} from "../utils/UserContext";
+import { fail } from "assert";
+import {ValidationAlert} from "../components/Alerts";
 
 class Signup extends Component {
     state = {
@@ -13,19 +15,23 @@ class Signup extends Component {
         lastName: null,
         dateOfBirth: null,
         gender: null,
+        validations: ""
     }
 
 
     validate = () => {
         // look into https://www.npmjs.com/package/react-validation
+        let failure_reasons = []
         let validated = true;
-        if (this.state.email == "" || this.state.password == "") {
-            validated = false
+        if (this.state.email === "") {
+            validated = false;
+            failure_reasons.push("Invalid email");
         }
-        else {
-            validated = true
+        if (this.state.password === "") {
+            validated = false;
+            failure_reasons.push("Invalid password");
         }
-        return validated
+        return [validated, failure_reasons]
     }
 
     handleChange = (e) => {
@@ -37,8 +43,9 @@ class Signup extends Component {
     }
 
     handleSumbit = () => {
-        let validated = this.validate();
-        console.log("is validated ", validated);
+        let validation = this.validate();
+        let validated = validation[0];
+        let failure_reasons = validation[1].join(", ");
         if (validated) { 
             API.postSignup(this.state)
                 .then(res => {
@@ -51,7 +58,9 @@ class Signup extends Component {
                 })
         }
         else {
-            console.log("not validated")
+            this.setState ({
+                validations: failure_reasons
+            })
         }
 
     }
@@ -65,6 +74,7 @@ class Signup extends Component {
                     :
                     <React.Fragment>
                         <h1>Signup</h1>
+                        {this.state.validations ? <ValidationAlert message={this.state.validations} />: null}
                         <Input onChange={this.handleChange} name="email" placeholder="Email" type="text" />
                         <Input onChange={this.handleChange} name="password" placeholder="Password" type="password" />
                         <Input onChange={this.handleChange} name="userName" placeholder="Username" type="text" />

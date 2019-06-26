@@ -17,9 +17,6 @@ export function Nav(props) {
     return(
     <ul className="nav">
         <li className="nav-item">
-            <Link className="nav-link" to="/">Home</Link>
-        </li>
-        <li className="nav-item">
             <Link className="nav-link" to="/myworkouts">Completed Workouts</Link>
         </li>
         <li className="nav-item">
@@ -27,7 +24,7 @@ export function Nav(props) {
         </li>
         {props.user.isAuthed ? 
             <li className="nav-item">
-            <Link className="nav-link btn-secondary btn" to="/login" onClick={e => handleLogout()}>Logout</Link>
+                <Link className="nav-link btn-secondary btn" to="/login" onClick={e => handleLogout()}>Logout</Link>
             </li>
             :
             <React.Fragment>

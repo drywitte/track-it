@@ -3,9 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Nav from "./components/Nav";
-import Users from "./pages/users";
 import Login from "./pages/login";
-import Home from "./pages/home";
 import trackedWorkouts from "./pages/trackedWorkouts";
 import WorkoutTemplates from "./pages/workoutTemplates";
 import Signup from "./pages/signup";
@@ -40,10 +38,8 @@ class App extends Component {
           <Router>
             <Nav />
             <Switch>
-              <Route exact path="/users" component={Users} />
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
-              <Route exact path="/" component={Home} />
               {this.state.isAuthed ? 
                 <React.Fragment>
                   <Route path="/myworkouts" component={trackedWorkouts} />
