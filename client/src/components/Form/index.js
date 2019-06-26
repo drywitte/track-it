@@ -10,7 +10,7 @@ export function Input(props) {
 
 export function Submit(props) {
     return (
-        <button {...props}>Submit</button>
+        <button className="m-2 btn btn-primary" {...props}>Submit</button>
     );
 }
 

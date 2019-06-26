@@ -6,7 +6,7 @@ import Nav from "./components/Nav";
 import Users from "./pages/users";
 import Login from "./pages/login";
 import Home from "./pages/home";
-import myWorkouts from "./pages/myWorkouts";
+import trackedWorkouts from "./pages/trackedWorkouts";
 import WorkoutTemplates from "./pages/workoutTemplates";
 import Signup from "./pages/signup";
 import UserContext from "./utils/UserContext";
@@ -46,7 +46,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               {this.state.isAuthed ? 
                 <React.Fragment>
-                  <Route path="/myworkouts" component={myWorkouts} />
+                  <Route path="/myworkouts" component={trackedWorkouts} />
                   <Route exact path="/workout_templates" component={WorkoutTemplates} />
                 </React.Fragment>
                 :

@@ -113,7 +113,7 @@ class WorkoutTemplates extends Component {
             <div className="card">
                 {this.state.mode === "view" ? (
                     <div>
-                        <button className="btn btn-primary" onClick={this.toggleMode}>Create New</button>
+                        <button className="btn btn-primary m-2" onClick={this.toggleMode}>Create New Workout</button>
                     </div>
                 ) 
                 : (

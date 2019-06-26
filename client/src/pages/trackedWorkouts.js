@@ -25,7 +25,7 @@ class MyWorkouts extends Component {
         console.log(this.state.workouts);
         return(
             <div>
-                <h1>My Workouts</h1>
+                <h1>Tracked Workouts</h1>
                 {this.state.workouts.map(workout => {
                         return <WorkoutTemplate 
                             key={workout.id} 

@@ -25,20 +25,17 @@ export function Nav(props) {
         <li className="nav-item">
             <Link className="nav-link" to="/workout_templates">Workout Templates</Link>
         </li>
-        <li className="nav-item">
-            <Link className="nav-link" to="/search">Browse Workouts</Link>
-        </li>
         {props.user.isAuthed ? 
             <li className="nav-item">
-            <Link className="nav-link btn-secondary btn" to="/long" onClick={e => handleLogout()}>Logout</Link>
+            <Link className="nav-link btn-secondary btn" to="/login" onClick={e => handleLogout()}>Logout</Link>
             </li>
             :
             <React.Fragment>
                 <li className="nav-item">
-                <Link className="nav-link btn-secondary btn m-1" to="/login">Login</Link>
+                <Link className="nav-link btn-primary btn m-1" to="/login">Login</Link>
                 </li>
                 <li className="nav-item">
-                <Link className="nav-link btn-secondary btn m-1" to="/signup">Signup</Link>
+                <Link className="nav-link btn-info btn m-1" to="/signup">Signup</Link>
                 </li>
             </React.Fragment>
         }
