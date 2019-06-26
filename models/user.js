@@ -14,7 +14,10 @@ module.exports = function(sequelize, DataTypes) {
         gender: DataTypes.STRING,
         password: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                len: [2,22]
+            }
         }
     });
 

@@ -18,9 +18,7 @@
     "react-router-dom": "^5.0.1",
     "sequelize": "^5.8.8"
   },
-  "devDependencies": {
-    "jest": "^24.8.0"
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
