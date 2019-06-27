@@ -17,7 +17,7 @@ export function Nav(props) {
     return(
     <ul className="nav">
         <li className="nav-item">
-            <Link className="nav-link" to="/myworkouts">Completed Workouts</Link>
+            <Link className="nav-link" to="/myworkouts">Tracked Workouts</Link>
         </li>
         <li className="nav-item">
             <Link className="nav-link" to="/workout_templates">Workout Templates</Link>
