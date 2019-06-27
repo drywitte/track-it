@@ -8,6 +8,7 @@ import trackedWorkouts from "./pages/trackedWorkouts";
 import WorkoutTemplates from "./pages/workoutTemplates";
 import Signup from "./pages/signup";
 import UserContext from "./utils/UserContext";
+import API from "./utils/API";
 
 class App extends Component {
   constructor(props) {
@@ -24,6 +25,20 @@ class App extends Component {
       isAuthed: bool,
       userId: userId
     })
+  }
+
+  componentDidMount() {
+    API.getCurrentUser()
+      .then(res => {
+          if(Object.keys(res.data).length > 0) {
+            this.setAuth(true, res.data.userId);
+          }
+          return
+        }
+      )
+      .catch(
+        err => console.log("unsuccessful", err)
+      )
   }
 
   render() {

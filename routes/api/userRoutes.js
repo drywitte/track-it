@@ -9,10 +9,29 @@ router.route("/")
       res.json(response);
     })
   })
+
+router.route("/isLoggedIn")
+  .get(function(req, res) {
+    if (req.user) {
+      const user = req.user.dataValues
+      res.json({
+        userId: user.id,
+      }).status(200);
+    }
+    else {
+      res.json({}).status(200);
+    }
+  })
   
 router.post('/login',
   passport.authenticate('local', { failureMessage: "invalid username or password"}), (req, res, next) => {
-  req.session.save((err) => {
+    if (req.user) {
+      console.log("there is a user")
+    }  
+    else{
+      console.log("no user")
+    }
+    req.session.save((err) => {
       if (err) {
           return next(err);
       }
@@ -20,7 +39,7 @@ router.post('/login',
         user_id: req.user.id
       }
       res.status(200).send(user);
-  });
+    });
 });
 
 // function(req, res, next) {

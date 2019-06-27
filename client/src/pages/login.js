@@ -3,6 +3,7 @@ import { Input, Submit } from "../components/Form"
 import API from "../utils/API"
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { withUser } from "../utils/UserContext";
+import {ValidationAlert} from "../components/Alerts";
 
 
 class Login extends Component {
@@ -11,7 +12,8 @@ class Login extends Component {
         this.state = {
             email: "",
             password: "",
-            page: null
+            page: null,
+            validations: ""
         }
     }
 
@@ -32,11 +34,15 @@ class Login extends Component {
         API.postLogin(body)
             .then(res => {
                 res.data.user_id ? (
-                    this.props.setAuth(true, res.data.user_id)
-                    )
+                    this.props.setAuth(true, res.data.user_id))
                     : this.props.setAuth(false, null)
             })
-            .catch(err => console.log(err.response))
+            .catch(err => {
+                console.log(err.response)
+                this.setState({
+                    validations: err.response.statusText
+                })
+            })
     }
     
     render() {
@@ -47,6 +53,7 @@ class Login extends Component {
                 : 
                 <div>
                 <h1>Login</h1>
+                {this.state.validations ? <ValidationAlert message={this.state.validations} /> : null}
                 <Input placeholder="email" name="email" type="text" onChange={this.handleChange} />
                 <Input placeholder="Password" name="password" type="password" onChange={this.handleChange} />
                 <Submit onClick={this.handleSubmit} />
