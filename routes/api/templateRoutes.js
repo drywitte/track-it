@@ -1,5 +1,6 @@
 const db = require("../../models");
 const router = require("express").Router();
+const Sequelize = require('sequelize');     
 
 router.route("/create")
     .post(function(req, res) {
@@ -12,7 +13,15 @@ router.route("/create")
 
 router.route("/")
     .get(function(req, res) {
-        db.Workout_template.findAll({}).then(function(dbres) {
+        db.Workout_template.findAll({
+            attributes: {
+                include: [[Sequelize.fn("COUNT", Sequelize.col("WorkoutTemplateId")), "tracked_count"]]
+            },
+            include: [{
+                model: db.Workout_instance, attributes: []
+            }],
+            group: ["Workout_template.id"]
+        }).then(function(dbres) {
             res.json(dbres);
         }).catch(function (err) {
             res.json(err);

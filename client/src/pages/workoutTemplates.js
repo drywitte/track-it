@@ -38,6 +38,7 @@ class WorkoutTemplates extends Component {
     loadTemplates = () => {
         API.getWorkoutTemplates()
             .then(res => {
+                console.log(res.data)
                 this.setState({
                     workout_templates: res.data
                 })
@@ -69,7 +70,6 @@ class WorkoutTemplates extends Component {
             UserId: this.props.user.userId
         })
     }
-
 
     postTemplate = (req) => {
         API.postWorkoutTemplate(req ).then(res => {
@@ -130,6 +130,7 @@ class WorkoutTemplates extends Component {
                         isEditable="false" 
                         name={workout.name} 
                         id={workout.id} 
+                        trackedCount={workout.tracked_count}
                         segments={workout.workout_structure} 
                         postCompleted={this.postCompleted}
                         isCompleted={this.state.completed_workouts.indexOf(workout.id) === -1 ? false : true}
