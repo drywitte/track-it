@@ -15,7 +15,7 @@ export function Nav(props) {
 
 
     return(
-    <ul className="nav">
+    <ul className="nav navbar-light bg-info">
         <li className="nav-item">
             <Link className="nav-link" to="/myworkouts"><h4>Tracked Workouts</h4></Link>
         </li>
@@ -37,7 +37,7 @@ export function Nav(props) {
                     <Link className="nav-link btn-primary btn m-1" to="/login">Login</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link btn-info btn m-1" to="/signup">Signup</Link>
+                    <Link className="nav-link btn-secondary btn m-1" to="/signup">Signup</Link>
                 </li>
             </React.Fragment>
         }
