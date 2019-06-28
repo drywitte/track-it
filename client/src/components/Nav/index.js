@@ -17,15 +17,15 @@ export function Nav(props) {
     return(
     <ul className="nav">
         <li className="nav-item">
-            <Link className="nav-link" to="/myworkouts">Tracked Workouts</Link>
+            <Link className="nav-link" to="/myworkouts"><h4>Tracked Workouts</h4></Link>
         </li>
         <li className="nav-item">
-            <Link className="nav-link" to="/workout_templates">Workout Templates</Link>
+            <Link className="nav-link" to="/workout_templates"><h4>Workout Templates</h4></Link>
         </li>
         {props.user.isAuthed ? (
             <React.Fragment>
              <li className="nav-item">
-                <Link className="nav-link" to="/profile">My Profile</Link>
+                <Link className="nav-link" to="/profile"><h4>My Profile</h4></Link>
             </li>   
             <li className="nav-item">
                 <Link className="nav-link btn-secondary btn" to="/login" onClick={e => handleLogout()}>Logout</Link>

@@ -66,7 +66,9 @@ export function WorkoutTemplate (props) {
                                     return <Segment key={keyName} id={keyName} isEditable={props.isEditable} segmentData={props.segments[keyName]} />
                             })
                             }
-                            <div>Number of tracks: {props.trackedCount ? props.trackedCount : 0}</div>
+                            {props.trackedCount ?
+                                (<div>{props.trackedCount} Trackers</div>)
+                                : null}
                         </div>
                         {props.displayAction ?
                             <button className="btn btn-primary m-1" id={props.id} onClick={e => props.postCompleted(e)} disabled={props.isCompleted} >Track it</button> 

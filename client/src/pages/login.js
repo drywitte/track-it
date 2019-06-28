@@ -9,11 +9,12 @@ import {ValidationAlert} from "../components/Alerts";
 class Login extends Component {
     constructor(props) {
         super(props);
+        console.log("props", this.props)
         this.state = {
             email: "",
             password: "",
             page: null,
-            validations: ""
+            validations: null
         }
     }
 
