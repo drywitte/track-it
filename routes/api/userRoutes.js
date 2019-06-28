@@ -11,7 +11,7 @@ router.route("/")
     .catch(err => res.status(422).json(err))
   })
 
-router.route("/:userid")
+router.route("/user/:userid")
   .get(function(req, res) {
     db.User.findOne({
       where: {

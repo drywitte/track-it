@@ -6,7 +6,7 @@ export default {
     },
 
     getUser: function(userId) {
-        return axios.get(`/api/users/${userId}`)
+        return axios.get(`/api/users/user/${userId}`)
     },
 
     getCurrentUser: function() {
@@ -14,7 +14,7 @@ export default {
     },
 
     updateUser: function(userid, body) {
-        return axios.put(`/api/users/${userid}`, body)
+        return axios.put(`/api/users/user/${userid}`, body)
     },
 
     getUserWorkouts: function(userid) {

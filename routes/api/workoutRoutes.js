@@ -27,7 +27,6 @@ router.route("/ids/:userid")
           }
         })
         .then(function(data) {
-          console.log(data)
           res.json(data);
         })
         .catch(err => res.status(422).json(err))
@@ -36,8 +35,8 @@ router.route("/ids/:userid")
 router.route("/create")
   .post(function(req, res) {
     db.Workout_instance.create(req.body)
-      .then(function(dbres) {
-        res.json(dbres);
+      .then(function(data) {
+        res.json(data);
       })
       .catch(err => res.status(422).json(err))
   })

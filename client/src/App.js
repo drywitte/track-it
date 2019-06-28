@@ -31,6 +31,7 @@ class App extends Component {
   componentDidMount() {
     API.getCurrentUser()
       .then(res => {
+          console.log(res)
           if(Object.keys(res.data).length > 0) {
             this.setAuth(true, res.data.userId);
           }
