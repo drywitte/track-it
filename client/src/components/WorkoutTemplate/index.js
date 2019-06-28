@@ -45,7 +45,7 @@ export function WorkoutTemplate (props) {
     return(
         <div className="card">
                 {props.isEditable === "true" ? (
-                        <div className="form-group">
+                        <div className="form-group m-2">
                         <form onSubmit={e => props.submitAction(new_template, name, e)}>
                             <input type="text" name="workoutName" onChange={e => handleNameChange(e)} className="card-title" placeholder="Workout Name" />
                             {
@@ -66,13 +66,14 @@ export function WorkoutTemplate (props) {
                                     return <Segment key={keyName} id={keyName} isEditable={props.isEditable} segmentData={props.segments[keyName]} />
                             })
                             }
-                            {props.trackedCount ?
-                                (<div>{props.trackedCount} Trackers</div>)
-                                : null}
                         </div>
                         {props.displayAction ?
                             <button className="btn btn-primary m-1" id={props.id} onClick={e => props.postCompleted(e)} disabled={props.isCompleted} >Track it</button> 
                             : null 
+                        }
+                        {props.trackedCount ?
+                            (<div>{props.trackedCount} <i class="fas fa-running"></i></div>)
+                            : null
                         }
                     </div>
                 )}
