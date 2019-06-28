@@ -3,19 +3,21 @@ import { Input, Submit, Selector } from "../components/Form"
 import API from "../utils/API"
 import { Redirect } from 'react-router-dom';
 import {withUser} from "../utils/UserContext";
-import { fail } from "assert";
 import {ValidationAlert} from "../components/Alerts";
 
 class Signup extends Component {
-    state = {
-        email: "",
-        password: "",
-        userName: null,
-        firstName: null,
-        lastName: null,
-        dateOfBirth: null,
-        gender: null,
-        validations: ""
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: "",
+            password: "",
+            userName: null,
+            firstName: null,
+            lastName: null,
+            dateOfBirth: null,
+            gender: null,
+            validations: ""
+        }
     }
 
 
@@ -39,13 +41,14 @@ class Signup extends Component {
         this.setState({
             [name] : value
         })
-
+        console.log(this.state)
     }
 
     handleSumbit = () => {
         let validation = this.validate();
         let validated = validation[0];
         let failure_reasons = validation[1].join(", ");
+        console.log(this.state)
         if (validated) { 
             API.postSignup(this.state)
                 .then(res => {
@@ -80,9 +83,9 @@ class Signup extends Component {
                         <Input onChange={this.handleChange} name="userName" placeholder="Username" type="text" />
                         <Input onChange={this.handleChange} name="firstName" placeholder="First name" type="text" />
                         <Input onChange={this.handleChange} name="lastName" placeholder="Last name" type="text" />
-                        <Selector onChange={this.handleChange} 
+                        <Selector 
                             name="gender" 
-                            onChange={this.handleChange}
+                            handleChange={this.handleChange}
                             options={[
                                 {value: "male"},
                                 {value: "female"},

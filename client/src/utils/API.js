@@ -5,8 +5,16 @@ export default {
         return axios.get("/api/users");
     },
 
+    getUser: function(userId) {
+        return axios.get(`/api/users/${userId}`)
+    },
+
     getCurrentUser: function() {
         return axios.get("/api/users/isLoggedIn");
+    },
+
+    updateUser: function(userid, body) {
+        return axios.put(`/api/users/${userid}`, body)
     },
 
     getUserWorkouts: function(userid) {

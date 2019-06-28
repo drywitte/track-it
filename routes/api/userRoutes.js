@@ -4,10 +4,42 @@ const passport = require("../../config/passport");
 
 router.route("/")
   .get(function(req, res) {
-      db.User.findAll({attributes:["id"]}
-      ).then(function(response) {
-      res.json(response);
+    db.User.findAll({attributes:["id"]})
+    .then(function(response) {
+        res.json(response);
     })
+    .catch(err => res.status(422).json(err))
+  })
+
+router.route("/:userid")
+  .get(function(req, res) {
+    db.User.findOne({
+      where: {
+        id: req.params.userid
+      }
+    })
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => {
+      res.status(422).json(err)
+    })
+  })
+  .put(function(req, res) {
+    db.User.update({
+        email: req.body.email,
+        last_name: req.body.lastName,
+        first_name: req.body.firstName,
+        gender: req.body.gender
+      },
+      {
+        where: {
+          id: req.params.userid
+        }
+      }
+    )
+    .then(data => res.status(200).json(data))
+    .catch(err => res.status(422).json(err))
   })
 
 router.route("/isLoggedIn")
@@ -68,19 +100,20 @@ router.post("/signup", function(req, res) {
   db.User.create(
     {
       email: body.email,
-      first_name: body.first_name,
-      last_name: body.last_name,
-      user_name: body.username,
-      date_of_birth: body.date_of_birth,
+      first_name: body.firstName,
+      last_name: body.lastName,
+      user_name: body.userName,
+      date_of_birth: body.dateOfBirth,
       gender: body.gender,
       password: body.password
-    }
-  ).then(function(data) {
+    })
+    .then(function(data) {
     let user = {
       user_id: data.dataValues.id
     }
     res.status(200).send(user);
-  }).catch(function(err) {
+  })
+  .catch(function(err) {
     console.log(err);
     res.status(422).send(err.errors[0].message);
   });

@@ -81,7 +81,6 @@ class WorkoutTemplates extends Component {
     }
 
     postCompleted = (e) => {
-        console.log(e.target.id)
         let new_completed_workouts = [...this.state.completed_workouts, parseInt(e.target.id)]
         this.setState({
             completed_workouts: new_completed_workouts
@@ -97,8 +96,6 @@ class WorkoutTemplates extends Component {
     }
 
     toggleMode = () => {
-        console.log("workout ids", this.state.completed_workouts)
-        console.log("workout_templates", this.state.workout_templates)
         this.state.mode === "view" ? 
             this.setState({
                 mode: "edit"
@@ -118,7 +115,7 @@ class WorkoutTemplates extends Component {
                 ) 
                 : (
                     <div>
-                        <button disabled={true} className="btn btn-primary" onClick={this.handleCreateNew}>Create New</button>
+                        <button disabled={true} className="btn btn-primary m-2" onClick={this.handleCreateNew}>Create New Workout</button>
                         <WorkoutTemplate 
                             isEditable="true" 
                             submitAction={this.handleSubmit} />

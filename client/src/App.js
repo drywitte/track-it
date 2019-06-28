@@ -7,6 +7,7 @@ import Login from "./pages/login";
 import trackedWorkouts from "./pages/trackedWorkouts";
 import WorkoutTemplates from "./pages/workoutTemplates";
 import Signup from "./pages/signup";
+import Profile from "./pages/profile";
 import UserContext from "./utils/UserContext";
 import API from "./utils/API";
 
@@ -62,6 +63,7 @@ class App extends Component {
                 <React.Fragment>
                   <Route path="/myworkouts" component={trackedWorkouts} />
                   <Route exact path="/workout_templates" component={WorkoutTemplates} />
+                  <Route exact path="/profile" component={Profile} />
                 </React.Fragment>
                 :
                 <Redirect to="/login" />

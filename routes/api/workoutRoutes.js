@@ -15,7 +15,7 @@ router.route("/:userid")
         .then(function(data) {
             res.json(data);
         })
-        .catch(err => console.log(err))
+        .catch(err => res.status(422).json(err))
   })
   
 router.route("/ids/:userid")
@@ -30,7 +30,7 @@ router.route("/ids/:userid")
           console.log(data)
           res.json(data);
         })
-        .catch(err => console.log(err))
+        .catch(err => res.status(422).json(err))
   })
 
 router.route("/create")
@@ -39,9 +39,7 @@ router.route("/create")
       .then(function(dbres) {
         res.json(dbres);
       })
-      .catch(function(err) {
-        res.json(err);
-      })
+      .catch(err => res.status(422).json(err))
   })
 
 
