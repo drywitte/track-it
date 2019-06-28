@@ -69,18 +69,19 @@ class Profile extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 {this.state.mode === "view" ? (
-                    <div className="card">
+                    <div className="card row">
                         <h1>{this.state.firstName} {this.state.lastName}</h1>
                         <div className="card-text">
                             <p>{this.state.email}</p>
                             <p>{this.state.gender}</p>
+                            <button className="btn btn-primary m-2 col-m-1" onClick={this.toggleMode}>Edit</button>
                         </div>
-                        <button className="btn btn-primary m-2" onClick={this.toggleMode}>Edit</button>
                     </div>
                 ): (
-                    <div className="card">
+                    <div className="card row">
+                        <div className="card-text">
                         {this.state.validations ? <ValidationAlert message={this.state.validations} />: null}
                         <Input onChange={this.handleChange} name="email" value={this.state.email} type="text" />
                         <Input onChange={this.handleChange} name="firstName" value={this.state.firstName} type="text" />
@@ -95,7 +96,8 @@ class Profile extends Component {
                                 {value: "other"}
                             ]}
                             />
-                        <button className="btn btn-primary m-2" onClick={this.handleSubmit}>Save</button>
+                        <button className="btn btn-primary m-2 col-m-1" onClick={this.handleSubmit}>Save</button>
+                        </div>
                     </div>
                 )}
             </div>

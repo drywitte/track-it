@@ -67,7 +67,10 @@ class App extends Component {
                   <Route exact path="/profile" component={Profile} />
                 </React.Fragment>
                 :
-                <Redirect to="/login" />
+                <Redirect to={{
+                    pathname: "/login",
+                    validations: "You must login to view that page"
+                 }} />
               }
             </Switch>
           </Router>

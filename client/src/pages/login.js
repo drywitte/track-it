@@ -14,7 +14,7 @@ class Login extends Component {
             email: "",
             password: "",
             page: null,
-            validations: null
+            validations: this.props.location.validations
         }
     }
 
@@ -48,7 +48,7 @@ class Login extends Component {
     
     render() {
         return (
-            <div>
+            <div className="container">
                 {this.props.user.isAuthed ? 
                     <Redirect to="/myworkouts" />
                 : 
